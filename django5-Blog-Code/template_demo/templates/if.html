@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>if标签</title>
+</head>
+<body>
+{% if age > 18 %}
+    <p>您已满18岁，可以进入网吧！</p>
+{% elif age == 18 %}
+    <p>您刚满18岁，还需要再观察一下！</p>
+{% else %}
+    <p>您未满18岁，禁止进入网吧！</p>
+{% endif %}
+</body>
+</html>

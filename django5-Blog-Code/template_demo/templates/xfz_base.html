@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}-小饭桌</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<header>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="/course">创业课堂</a></li>
+    </ul>
+</header>
+{% block body %}我是来自父模板的{% endblock %}
+<footer>©2022 北京子木投资顾问有限公司 京ICP备15051289号 | 增值电信业务经营许可证：京B2-20170574</footer>
+</body>
+</html>

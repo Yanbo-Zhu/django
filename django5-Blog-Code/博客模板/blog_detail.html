@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CSDN技术博客</title>
+	<link rel="stylesheet" type="text/css" href="./bootstrap5/bootstrap.min.css">
+	<script type="text/javascript" src="./bootstrap5/popper.min.js"></script>
+	<script type="text/javascript" src="./bootstrap5/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/base.css">
+</head>
+<body>
+	<header class="p-3 text-bg-light border-bottom mb-3">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img src="./images/logo.png" height="40">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">首页</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">发布博客</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-primary me-2">登录</button>
+          <button type="button" class="btn btn-primary">注册</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class='container p-4 rounded bg-white'>
+  	<h1>博客列表</h1>
+    <hr>
+    <div class="mt-3">
+    	<img src="./images/avatar.webp" width='30' height='30' class='rounded-circle me-2'>知了<span class='ms-2 me-2'>于</span>2024年3月29日 11:28发布
+    </div>
+    <hr>
+    <h3>评论（10）</h3>
+    <form action="" method='POST'>
+    	<div class="form-group">
+    		<input type="text" name="content" class='form-control' placeholder="请输入评论内容">
+    	</div>
+    	<div class="form-group text-end mt-2">
+    		<button class="btn btn-primary">评论</button>
+    	</div>
+    </form>
+    <ul class='mt-4 list-group list-group-flush'>
+    	<li class="list-group-item">
+    		<div class="d-flex justify-content-between text-body-tertiary">
+    			<div class="base-info">
+    				<img src="./images/avatar.webp" width='40' height='40' class='rounded-circle me-2'>知了
+    			</div>
+    			<div>
+    				2024年3月29日 11:28
+    			</div>
+    		</div>
+    		<p class="mt-2">
+    			我爱Django
+    		</p>
+    	</li>
+    	<li class="list-group-item">
+    		<div class="d-flex justify-content-between text-body-tertiary">
+    			<div class="base-info">
+    				<img src="./images/avatar.webp" width='40' height='40' class='rounded-circle me-2'>知了
+    			</div>
+    			<div>
+    				2024年3月29日 11:28
+    			</div>
+    		</div>
+    		<p class="mt-2">
+    			我爱Django
+    		</p>
+    	</li>
+    </ul>
+  </main>
+</body>
+</html>
