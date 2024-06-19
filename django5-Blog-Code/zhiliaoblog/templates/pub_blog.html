@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}发布博客{% endblock %}
+
+{% block head %}
+    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'wangeditor/style.css' %}">
+    <script src="{% static 'wangeditor/index.js' %}"></script>
+    <script src="{% static 'js/pub_blog.js' %}"></script>
+    <style>
+      #editor—wrapper {
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */
+      }
+      #toolbar-container { border-bottom: 1px solid #ccc; }
+      #editor-container { height: 500px; }
+    </style>
+{% endblock %}
+
+
+{% block main %}
+	<h1>发布博客</h1>
+    <div class="mt-3">
+        <form action="" method="POST">
+        {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">标题</label>
+                <input type="text" name="title" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">分类</label>
+                <select name="category" class="form-select" id="category-select">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">内容</label>
+                <div id="editor—wrapper">
+                    <div id="toolbar-container"><!-- 工具栏 --></div>
+                    <div id="editor-container"><!-- 编辑器 --></div>
+                </div>
+            </div>
+            <div class="mb-3 text-end">
+                <button class="btn btn-primary" id="submit-btn">发布</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
