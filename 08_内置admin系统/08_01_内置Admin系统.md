@@ -5,12 +5,19 @@ Admin后台系统也称为网站后台管理系统，主要对网站的信息进
 
 # 1 Django5内置Admin系统初体验
 
+
+1 
+
+
 当一个网站上线之后，网站管理员通过网站后台系统对网站进行管理和维护。
 Django 已内置Admin后台系统，在创建Django项目的时候，可以从配置文件settings.py中看到项目已默认启用Admin后台系统。
 
 
 ![[08_内置admin系统/images/Pasted image 20240619222511.png]]
 
+---
+
+2
 我们浏览器输入http://127.0.0.1:8000/admin/ 即可进入Admin系统首页，默认跳转到Admin系统登录页面。
 ![[08_内置admin系统/images/Pasted image 20240619222527.png]]
 
@@ -30,6 +37,8 @@ Admin系统用户，权限，认证相关的表有如下6个，其中auth_user�
 ![[08_内置admin系统/images/Pasted image 20240619222734.png]]
 
 
+---
+3
 
 我们可以通过python内置的manage.py的createsuperuser 命令来创建超级管理员的账号和密码：
 执行python manage.py createsuperuser, 依次输入Username, Email, Password即可
@@ -43,6 +52,10 @@ Admin系统用户，权限，认证相关的表有如下6个，其中auth_user�
 
 我们回到Admin登录页面，输入刚才创建的用户名和密码：
 ![[08_内置admin系统/images/Pasted image 20240619223028.png]]
+
+
+---
+
 
 点击登录按钮，则进入系统管理主页；
 ![[08_内置admin系统/images/Pasted image 20240619223040.png]]
@@ -68,6 +81,16 @@ from helloWorld.models import BookTypeInfo
 # 方法一，将模型直接注册到admin后台
 admin.site.register(BookTypeInfo)
 ```
+
+
+在后台管理系统注册创建的模型
+   ```python
+   from django.contrib import admin
+   from blog.models import Post, Category, Tag
+
+   # 在应用目录下的 admin.py 文件中，对创建的模型进行注册，可以一起用列表注册，也可以分开注册
+   admin.site.register([Post, Category, Tag])
+   ```
 
 ![[08_内置admin系统/images/Pasted image 20240619223509.png]]
 
@@ -100,6 +123,65 @@ Admin后台就多了图书信息
 
 ![[08_内置admin系统/images/Pasted image 20240619223731.png]]
 
+
+
+### 2.2.1 例子2
+
+
+   ```python
+   # 在使用后台管理的时候，可能需要自己定制 admin 的显示内容，可以通过如下进行定制
+   @admin.register(Post)
+   class PostAdmin(admin.ModelAdmin)
+   	list_display = ['title', 'category', 'author'] # 需要展示的字段
+   	
+   # 或者通过以下方式注册，效果是一样的
+   class PostAdmin(admin.ModelAdmin)
+   	list_display = ['title', 'category', 'author'] 
+   	
+   admin.site.register(Post, PostAdmin)
+
+   @admin.register(Category)
+   class CategoryAdmin(admin.ModelAdmin)
+       # 显示的标签字段，字段不能是 ManyToManyField 类型
+       list_display = ('title', 'publisher')
+       
+   	# 设置每页显示多少条记录，默认是100条
+       list_per_page = 20
+       
+       # 设置默认可编辑字段
+       list_editable = ['title', 'author']
+       
+       # 排除一些不想被编辑的 fields, 没有在列表的不可被编辑
+       fields = ('title', 'author')
+       
+       # 设置哪些字段可以点击进入编辑界面
+       list_display_links = ('tag', 'title')
+       
+       # 进行数据排序，负号表示降序排序
+       ordering = ('-id',)
+       
+       # 显示过滤器
+       list_filter = ('author', 'title')
+       
+       # 显示搜索框，搜索框大小写敏感
+       search_fields = ('title',)
+       
+       # 详细时间分层筛选
+       date_hierarchy = 'create_time'
+       
+       # 增加多选框 filter_horizaontal 和 filter_vertical 作用相同，只是方向不同，只用于
+       # ManyToManyField 类型的字段
+       filter_horizontal = ('authors',)
+       
+   # 修改 admin 页面显示标题
+   admin.site.site_header = "Blog Manager System"
+   # 修改 admin 页面头部标题
+   admin.site.site_title = "Blog Manager"
+   ```
+   修改以后，我们的界面可以看到是以下这样的
+![修改后 admin 登录界面](https://upload-images.jianshu.io/upload_images/2888797-0e0472f285e9f4fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)![admin 管理界面](https://upload-images.jianshu.io/upload_images/2888797-b545b78da9b39a3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+为了可以和用户进行交流，我们需要获取用户的一些评论之类的，所以我们需要通过表单让用户提交信息，接下来我们将了解下 django 的表单
 
 
 # 3 Django5内置Admin系统自定义设置

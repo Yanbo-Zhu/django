@@ -26,6 +26,35 @@ class Paginator(object_list, per_page, orphans=0, allow_empty_first_page=True) �
 3. num_pages ：总共有多少页。
 4. page_range ：页面的区间。比如有三页，那么就range(1,4) 。
 
+
+## 1.3 例子 
+
+最后我们列下 Paginator 常用属性结束 django 的入门教程
+``````python
+from django.core.paginator import Paginator
+item_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+# 指定 paginator 的列表以及每页显示的列表数量
+p = Paginator(item_list, 2)
+print(p.count) # 返回列表的总数	14
+print(p.num_pages) # 返回总页数    7
+print(p.page_range) # 返回页数的范围	(1, 8)
+print(p.per_page) # 返回每页列表的数量
+print(p.object_list) # 返回所有的列表 item
+
+# 通过 page(num) 方法获取 num 页的列表 <Page 2 of 7>
+page2 = p.page(2)
+print(page2.number) # 获取当前页的页码
+print(page2.object_list) # 获取该页码下的所有列表    ['c', 'd']
+print(page2.has_next()) # 是否有下页    True
+print(page2.has_previous()) # 是否有上页    True
+print(page2.has_other_pages()) # 是否有其他页    True
+# 如果没有上/下一页则返回 EmptyPage 错误 EmptyPage: That page contains no results
+print(page2.next_page_number()) # 获取下一页的页码    3
+print(page2.previous_page_number()) # 获取上一页的页码    1
+print(page2.start_index()) # 当前页第一个 item 在列表中的位置    3
+print(page2.end_index()) # 当前页最后一个 item 在列表中的位置    4
+``````
+
 # 2 page
 
 Page常用属性和方法：

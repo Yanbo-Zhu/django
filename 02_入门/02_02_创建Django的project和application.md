@@ -76,6 +76,8 @@ app 是django 项目的组成部分。一个app 代表项目中的一个模块�
 然后执行python manage.py startapp [app名称] 创建一个app。
 或者 django-admin startproject mysite
 
+然后在 settings.py 中的 INSTALLED_APPS 列表中注册 'blog' 应用
+
 系统会自动生成 polls应用的目录，其结构如下：
 
 ```

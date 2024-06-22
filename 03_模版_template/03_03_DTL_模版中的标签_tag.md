@@ -119,6 +119,21 @@ context = {
 通过硬编码的方式直接将这个url 写死在里面也是可以的。但是这样对于以后项目维护可能不是一件好事。
 因此建议使用这种反转的方式来实现，类似于django 中的reverse 一样。
 
+```python
+   from django.conf.urls import url
+   from . import views
+
+   # 加上 app_name, 值同 include 中 namespace 的值，否则可能会找不到 url
+   app_name = 'blog'
+   urlpatterns = [
+   	# 当模版引用本地 url 时候需要用到 name 字段值，例如
+   	# <a href="{% url 'blog:home' %}"><b>Home</b></a>
+       url(r'^home$', views.home, name=home),
+   ]
+ ```
+
+
+
 示例代码如下：
 
 ```
