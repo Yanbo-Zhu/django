@@ -13,21 +13,23 @@ View(视图)：负责业务逻辑，并在适当的时候调用Model和Template
 ![](images/Pasted%20image%2020240618232343.png)
 
 
-# 2 Project 
+# 2 Project 和 app
 
-## 2.1 用命令行的方式：
-1. 创建项目：打开终端，使用命令： django-admin startproject [项目名称] 即可创建。比如： django-admin startproject first_project 。
-2. 创建应用（app）：一个项目类似于是一个架子，但是真正起作用的还是app 。在终端进入到项目所在的路径，然后执行python manage.py startapp [app名称] 创建一个app。
+- 在Django项目中，有两个重要的概念：
+    - **app**: 完成某个任务的web应用程序, app由models（数据库表）, views（视图）, templates（模板）, tests（测试）组成。
+    - **project**: 是配置和应用的集合, 一个项目由一个或多个应用组成。
+
+# 3 创建Project 
+
+1. 创建项目：打开终端，
+	1. 使用命令： django-admin startproject [项目名称] 即可创建。比如： django-admin startproject first_project 。`django-admin.py startproject new_project_name`
 
 
 或者用 pycharm 可以直接创建 
 
-命令: 
-`django-admin.py startproject new_project_name`
 
-django-admin startproject mysite
 
-# 3 新建立的项目结构
+# 4 新建立的项目结构
 
 ```
 mysite/  
@@ -53,7 +55,7 @@ mysite/
 3. urls.py ：这个文件是用来配置URL路由的。比如访问http://127.0.0.1/news/ 是访问新闻列表 页，这些东西就需要在这个文件中完成。
 4. wsgi.py ：项目与WSGI 协议兼容的web 服务器入口，部署的时候需要用到的，一般情况下也是不 需要修改的。
 
-## 3.1 运行Django项目
+# 5 运行Django项目
 
 通过命令行的方式： 
 - python manage.py runserver 。 这样可以在本地访问你的网站，默认端口号 是8000 ，这样就可以在浏览器中通过http://127.0.0.1:8000/ 来访问你的网站啦。
@@ -65,53 +67,14 @@ mysite/
 
 
 
-## 3.2 python manage.py help
-
-![](images/Pasted%20image%2020240618232004.png)
-
-
-指令说明
-changepassword 修改内置用户表的用户密码
-createsuperuser 为内置用户表创建超级管理员账号
-remove_stale_contenttypes 删除数据库中已不使用的数据表
-check 检测整个项目是否存在异常问题
-compilemessages 编译语言文件，用于项目的区域语言设置
-createcachetable 创建缓存数据表，为内置的缓存机制提供存储功能
-dbshell 进入Django配置的数据库，可以执行数据库的SOL语句
-diffsettings 显示当前settings.py的配置信息与默认配置的差异
-dumpdata 导出数据表的数据并以JSON格式存储，如 python manage.py
-dumpdata index >data.json，这是index的模型所对应的数据导 出，并保存在 data.json文件中
-flush 清空数据表的数据信息
-inspectdb 获取项目所有模型的定义过程
-loaddata 将数据文件导入数据表，如 python manage.py loaddatadata.,json
-makemessages 创建语言文件，用于项目的区域语言设置
-makemigrations 从模型对象创建数据迁移文件并保存在App 的migrations文件夹
-migrate 根据迁移文件的内容，在数据库里生成相应的数据表
-sendtestemail 向指定的收件人发送测试的电子邮件
-shell 进入Django的Shell模式,用于调试项目功能
-showmigrations 查看当前项目的所有迁移文件
-sqlflush 查看清空数据库的SOL语句脚本
-sqlmigrate 根据迁移文件内容输出相应的SQL语句
-sqlsequencereset 重置数据表递增字段的索引值
-squashmigrations 对迁移文件进行压缩处理
-startapp 创建项目应用App
-optimizemigration 允许优化迁移操作
-startproject 创建新的Django项目
-test 运行App里面的测试程序
-testserver 新建测试数据库并使用该数据库运行项目
-clearsessions 清除会话Session数据
-collectstatic 收集所有的静态文件
-findstatic 查找静态文件的路径信息
-runserver 在本地计算机上启动Django项目
-
-
-# 4 Application
+# 6 Application
 
 app 是django 项目的组成部分。一个app 代表项目中的一个模块，所有URL 请求的响应都是由app 来 处理。比如豆瓣，里面有图书，电影，音乐，同城等许许多多的模块，如果站在django 的角度来看，图 书，电影这些模块就是app ，图书，电影这些app 共同组成豆瓣这个项目。因此这里要有一个概念， django 项目由许多app 组成，一个app 可以被用到其他项目， django 也能拥有不同的app 。
 
-通过命令： python manage.py startapp book 可以新造一个 app 出来 
-
-python manage.py startapp polls
+命令: 
+创建应用（app）：一个项目类似于是一个架子，但是真正起作用的还是app 。在终端进入到项目所在的路径，
+然后执行python manage.py startapp [app名称] 创建一个app。
+或者 django-admin startproject mysite
 
 系统会自动生成 polls应用的目录，其结构如下：
 
@@ -139,19 +102,19 @@ polls/
 
 
 
-# 5 例子 创建HelloWorldProject
+# 7 例子 创建HelloWorldProject
 
 前面对应用创建和应用配置掌握后，我们来编写第一个Hello World应用吧。体验一把Django5的项目开发过程。
 
 
 
-## 5.1 创建Hello World应用
+## 7.1 创建Hello World应用
 直接执行startapp helloWorld 命令创建应用
 
 
 
 
-## 5.2 注册应用到项目的settings.py
+## 7.2 注册应用到项目的settings.py
 
 ![](images/Pasted%20image%2020240618233454.png)
 
@@ -159,7 +122,7 @@ polls/
 把helloWorld应用的apps.py里的HelloworldConfig类注册到settings.py里去
 ![](images/Pasted%20image%2020240618233506.png)
 
-## 5.3 编写模版网页代码index.html
+## 7.3 编写模版网页代码index.html
 
 在templates目录下，新建index.html文件
 
@@ -180,7 +143,7 @@ polls/
 </html>
 ```
 
-## 5.4 编写视图处理请求层代码
+## 7.4 编写视图处理请求层代码
 在应用的views.py里编写index方法,request是客户端请求对象,render是渲染方法，可以携带数据渲染
 到指定页面
 
@@ -191,7 +154,7 @@ return render(request,'index.html')
 
 
 
-## 5.5 编写请求映射函数配置
+## 7.5 编写请求映射函数配置
 在项目的urls.py里编写应用的index/请求，执行我们上面应用定义的请求处理代码，也就是写一个映射关系代码。
 
 
@@ -208,7 +171,7 @@ urlpatterns = [
 ![](images/Pasted%20image%2020240618233805.png)
 
 
-## 5.6 启动项目，测试
+## 7.6 启动项目，测试
 
 我们可以用前面讲的Django5的操作命令 runserver 启动
 

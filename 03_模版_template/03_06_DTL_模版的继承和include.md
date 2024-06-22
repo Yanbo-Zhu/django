@@ -160,7 +160,7 @@ urls.py里加一个映射：
 
 
 浏览器输入： http://127.0.0.1:8000/toCourse/
-![[03_模版/images/Pasted image 20240619172228.png]]
+![[03_模版_template/images/Pasted image 20240619172228.png]]
 
 我们发现模板里的标题和内容被course页面修改了，其他的没变。
 

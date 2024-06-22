@@ -191,7 +191,7 @@ context = {
 
 那么将会输出2058/02/01 。其中Y 代表的是四位数字的年份， m 代表的是两位数字的月份， d 代表的是两位数字的日。
 
-![](images/Pasted%20image%2020240616181933.png)
+![](03_模版_template/images/Pasted%20image%2020240616181933.png)
 
 
 ## 2.4 default
@@ -232,7 +232,7 @@ context = {
 
 使用四舍五入的方式格式化一个浮点类型。如果这个过滤器没有传递任何参数。那么只会在小数点后保留一个小数，如果小数后面全是0，那么只会保留整数。当然也可以传递一个参数，标识具体要保留几个小数。
 
-![](images/Pasted%20image%2020240616182353.png)
+![](03_模版_template/images/Pasted%20image%2020240616182353.png)
 
 
 ## 2.9 join
@@ -411,7 +411,7 @@ date:{{ date }} - >> {{ date | date:'Y-m-d H:i:s' }}
 ```
 
 运行测试：
-![[03_模版/images/Pasted image 20240619172740.png]]
+![[03_模版_template/images/Pasted image 20240619172740.png]]
 
 
 

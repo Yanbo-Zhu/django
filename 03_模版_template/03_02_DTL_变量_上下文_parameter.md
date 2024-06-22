@@ -165,5 +165,5 @@ index.html:
 
 
 测试，浏览器输入： http://127.0.0.1:8000/index/
-![[03_模版/images/Pasted image 20240619170742.png]]
+![[03_模版_template/images/Pasted image 20240619170742.png]]
 
