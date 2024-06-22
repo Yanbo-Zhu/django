@@ -1,0 +1,38 @@
+
+
+![](images/Pasted%20image%2020240618232004.png)
+
+
+指令说明
+changepassword 修改内置用户表的用户密码
+createsuperuser 为内置用户表创建超级管理员账号
+remove_stale_contenttypes 删除数据库中已不使用的数据表
+check 检测整个项目是否存在异常问题
+compilemessages 编译语言文件，用于项目的区域语言设置
+createcachetable 创建缓存数据表，为内置的缓存机制提供存储功能
+dbshell 进入Django配置的数据库，可以执行数据库的SOL语句
+diffsettings 显示当前settings.py的配置信息与默认配置的差异
+dumpdata 导出数据表的数据并以JSON格式存储，如 python manage.py
+dumpdata index >data.json，这是index的模型所对应的数据导 出，并保存在 data.json文件中
+flush 清空数据表的数据信息
+inspectdb 获取项目所有模型的定义过程
+loaddata 将数据文件导入数据表，如 python manage.py loaddatadata.,json
+makemessages 创建语言文件，用于项目的区域语言设置
+makemigrations 从模型对象创建数据迁移文件并保存在App 的migrations文件夹
+migrate 根据迁移文件的内容，在数据库里生成相应的数据表
+sendtestemail 向指定的收件人发送测试的电子邮件
+shell 进入Django的Shell模式,用于调试项目功能
+showmigrations 查看当前项目的所有迁移文件
+sqlflush 查看清空数据库的SOL语句脚本
+sqlmigrate 根据迁移文件内容输出相应的SQL语句
+sqlsequencereset 重置数据表递增字段的索引值
+squashmigrations 对迁移文件进行压缩处理
+startapp 创建项目应用App
+optimizemigration 允许优化迁移操作
+startproject 创建新的Django项目
+test 运行App里面的测试程序
+testserver 新建测试数据库并使用该数据库运行项目
+clearsessions 清除会话Session数据
+collectstatic 收集所有的静态文件
+findstatic 查找静态文件的路径信息
+runserver 在本地计算机上启动Django项目
