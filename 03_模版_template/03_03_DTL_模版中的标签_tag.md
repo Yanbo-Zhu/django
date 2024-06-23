@@ -136,14 +136,14 @@ context = {
 
 示例代码如下：
 
-```
+```python
 <a href="{% url 'book:list' %}">图书列表页面</a>
 ```
 
 如果url 反转的时候需要传递参数，那么可以在后面传递。但是参数分位置参数和关键字参数。位置参数和关键字参数不能同时使用。
 
 示例代码如下
-```
+```python
 # path部分
 path('detail/<book_id>/',views.book_detail,name='detail')
 
@@ -164,7 +164,7 @@ path('detail/<book_id>/',views.book_detail,name='detail')
 
 移除html标签中的空白字符。包括空格、tab键、换行等。示例代码如下
 
-```
+```html
 {% spaceless %}
     <p>
         <a href="foo/">Foo</a>
@@ -174,13 +174,13 @@ path('detail/<book_id>/',views.book_detail,name='detail')
 
 那么在渲染完成后，会变成以下的代码：
 
-```
+```python
 <p><a href="foo/">Foo</a></p>
 ```
 
 spaceless 只会移除html标签之间的空白字符。而不会移除标签与文本之间的空白字符。看以下代码：
 
-```
+```html
 {% spaceless %}
     <strong>
         Hello

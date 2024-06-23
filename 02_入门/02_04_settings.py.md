@@ -408,10 +408,42 @@ USE_TZ = True 它指对时区的处理方式，当设置为 True 的时候，存
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' 默认主键自增类型
 
 
+## 6.1 基础配置（中文）
+
+通过上面的配置，你看到的界面应该是英文的，并且时区也是UTC时区。所以我们需要进一步配置。
+
+在settings中有如下配置:
+    LANGUAGE_CODE = 'zh-hans'  # 语言
+    TIME_ZONE = 'Asia/Shanghai'  # 时区
+    USE_I18N = True  # 语言
+    USE_L10N = True  # 数据和时间格式
+    USE_TZ = True  # 启用时区
+
+修改完这些之后，刷新下试试。你可以尝试修改上面的配置，看看分别对应什么功能。
+
+到这一部分我们基本上完成了admin的部分。下一节我们来完成页面提交数据的部分，看下如何使用Form。
 
 
+---
+汉化 
 
+在`MIDDLEWARE`部分，增加`django.middleware.locale.LocaleMiddleware`，代码如下：
 
+```python
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+]
+```
 
+刷新下界面，是不是变成汉字了。
+
+国际化支持在 Django 中做得是非常的出色，程序可以国际化，模板可以国际化，甚至js都可以国际化。这一点其它的类似框架都还做不到。而国际化的支持更是 RoR 的一个弱项，甚至在 [Snakes and Rubies](http://snakesandrubies.com/event) 的会议上，RoR 的作者都不想支持国际化。但 Django 却做得非常出色，目前已经有二十多种语言译文。
 
 

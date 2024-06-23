@@ -396,7 +396,7 @@ def filter_view(request):
 
 views.py index函数我们修改下：str改成"hello"，再定义一个日期对象
 
-```
+```python
 def index(request):
 	str = "hello"
 	date = datetime.datetime.now()
@@ -411,7 +411,7 @@ def index(request):
 ```
 
 index.html加下：
-```
+```html
 <p>内置过滤器</p>
 capfirst:{{ msg | capfirst }}<br>
 length:{{ msg | length }}<br>

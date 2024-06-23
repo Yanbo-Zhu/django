@@ -225,5 +225,3 @@ admin.site.index_title = '图书管理模块'
 admin.site.site_header = "python222网站管理系统"
 ![[08_内置admin系统/images/Pasted image 20240619225204.png]]
 
-
-

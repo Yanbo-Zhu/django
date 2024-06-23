@@ -60,7 +60,7 @@ endblock %} 标签成对出现
 
 以下是父模版的代码：
 
-```
+```html
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +88,7 @@ endblock %} 标签成对出现
 
 这个模版，我们取名叫做base.html ，定义好一个简单的html 骨架，然后定义好两个block 接口，让子模版来根据具体需求来实现。子模板然后通过extends 标签来实现，示例代码如下：
 
-```
+```html
 {% extends "base.html" %}
 
 {% block title %}博客列表{% endblock %}
