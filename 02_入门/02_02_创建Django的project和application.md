@@ -52,7 +52,11 @@ mysite/
 
 通过pycharm 运行。直接点击右上角的绿色箭头按钮即可运行。
 
+如果说要修改服务器地址端口号，可如下命令行进行操作
+```python manage.py runserver 8080```
 
+如果要修改服务器地址，首先需要将修改后的服务器地址写入项目下 settings.py 文件下 ALLOWED_HOSTS[] 列表内，然后通过命令行切换服务器地址
+```python manage.py runserver 192.168.0.1:8080```
 
 # 5 Application
 
