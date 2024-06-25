@@ -5,8 +5,12 @@
 
 所以我们如果想要学习ORM 模型的查找操作，必须首先要学会QuerySet 上的一些API 的使用。
 
+通过模型的Manager获得QuerySet，每个模型至少具有一个Manager，默认情况下，它被称作objects，可以通过模型类直接调用它，但不能通过模型类的实例调用它，以此实现“表级别”操作和“记录级别”操作的强制分离。
+
 
 # 1 返回新的QuerySet的方法
+
+方法就是API 
 
 在使用QuerySet 进行查找操作的时候，可以提供多种操作。比如过滤完后还要根据某个字段进行排序， 那么这一系列的操作我们可以通过一个非常流畅的链式调用的方式进行。比如要从文章表中获取标题为 123 ，并且提取后要将结果根据发布的时间进行排序，那么可以使用以下方式来完成
 
@@ -15,12 +19,81 @@
 可以看到order_by 方法是直接在filter 执行后调用的。这说明filter 返回的对象是一个拥有 order_by 方法的对象。而这个对象正是一个新的QuerySet 对象。因此可以使用order_by 方法
 
 
-# 2 常用的QuerySet方法
+下面都是返回新的 QuerySets的API
+```
+filter() 过滤查询对象。
+
+exclude() 排除满足条件的对象
+
+annotate() 使用聚合函数
+
+order_by() 对查询集进行排序
+
+reverse() 反向排序
+
+distinct() 对查询集去重
+
+values() 返回包含对象具体值的字典的QuerySet
+
+values_list() 与values()类似，只是返回的是元组而不是字典。
+
+none() 创建空的查询集
+
+all() 获取所有的对象
+
+select_related() 附带查询关联对象
+```
+
+
+# 2 不返回QuerySets的方法
+
+就是这个方法被执行后 不会返回一个  数据类型的为 QuerySets 的 数据 
+
+```
+get() 获取单个对象
+
+create() 创建对象，无需save()
+
+get_or_create() 查询对象，如果没有找到就新建对象
+
+update_or_create() 更新对象，如果没有找到就创建对象
+
+count() 统计对象的个数
+
+latest() 获取最近的对象
+
+earliest() 获取最早的对象
+
+first() 获取第一个对象
+
+last() 获取最后一个对象
+
+aggregate() 聚合操作
+
+exists() 判断queryset中是否有对象
+
+update() 批量更新对象
+
+delete() 批量删除对象
+```
+
+# 3 常用的QuerySet方法
 
 那么以下将介绍在那些会返回新的QuerySet 对象的方法。
 
 1 filter 
 将满足条件的数据提取出来，返回一个新的QuerySet 。具体的filter 可以提供什么条件查询。请见查询操作章节。
+
+链式过滤
+被过滤的QuerySets都是唯一的
+```
+>>> q1 = Entry.objects.filter(headline__startswith="What")  
+>>> q2 = q1.exclude(pub_date__gte=datetime.date.today())  
+>>> q3 = q1.filter(pub_date__gte=datetime.date.today())  
+>>> 例子中的q2和q3虽然由q1得来，是q1的子集，但是都是独立自主存在的。同样q1也不会受到q2和q3的影响。
+```
+
+
 
 2 exclude
 排除满足条件的数据，返回一个新的QuerySet 。示例代码如下：
@@ -286,7 +359,7 @@ for book in books:
 
 切片操作并不是把所有数据从数据库中提取出来再做切片操作。而是在数据库层面使用LIMIE 和 OFFSET 来帮我们完成。所以如果只需要取其中一部分的数据的时候，建议大家使用切片操作。
 
-# 3 什么时候Django会将QuerySet转换为SQL去执 行
+# 4 什么时候Django会将QuerySet转换为SQL去执 行
 
 
 生成一个QuerySet 对象并不会马上转换为SQL 语句去执行。

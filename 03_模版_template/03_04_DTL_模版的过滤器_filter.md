@@ -79,6 +79,14 @@ wordcount 单词计数
 wordwrap 单词包裹
 yesno 将True，False和None，映射成字符串‘yes’，‘no’，‘maybe’
 
+
+> add:"n"，对象相加，如果是数字则是数字加法，列表则是列表的和，无法相加为空。
+> addslashes，增加反斜杠，处理 Javascript 文本非常有用
+> truncatewords:"n"，显示变量前 n 个字符
+> pluralize:"y, ies"，单词的复数形式，可以通过参数设置复数形式
+> date:"xxx"，按指定的格式字符串参数格式化 date 或者 datetime 对象，例如 {{ pub| date:"F j, Y" }}	length，返回变量的长度；对于列表，返回列表元素的个数。对于字符串，返回字符串中字符的个数
+> safe，当系统设置 autoescaping 打开的时候，该过滤器使得输出不进行 escape 转换
+> striptags，删除 value 中的所有 HTML 标签
 ## 1.2 根据给定的格式格式化日期
 
 格式字
@@ -388,7 +396,7 @@ def filter_view(request):
 
 views.py index函数我们修改下：str改成"hello"，再定义一个日期对象
 
-```
+```python
 def index(request):
 	str = "hello"
 	date = datetime.datetime.now()
@@ -403,7 +411,7 @@ def index(request):
 ```
 
 index.html加下：
-```
+```html
 <p>内置过滤器</p>
 capfirst:{{ msg | capfirst }}<br>
 length:{{ msg | length }}<br>
@@ -413,6 +421,56 @@ date:{{ date }} - >> {{ date | date:'Y-m-d H:i:s' }}
 运行测试：
 ![[03_模版_template/images/Pasted image 20240619172740.png]]
 
+
+# 5 django 自定义过滤器和标签
+
+1. 在应用目录下创建 templatetags 文件夹，同时建立空文件 __ init __.py 和过滤器文件 例如 custom_filter.py 
+   2. 在 custom_filter.py 文件中添加过滤器
+```python
+from django import template
+from blog.models import Category
+# register 是 template.Library 的实例，是所有注册标签和过滤器的数据结构
+register = template.Libary()
+
+# 自定义过滤器
+@register.filter
+def get_value(dic, key_name):
+return dic.get(key_name)
+
+@register.filter
+def get_attr(d, m):
+if hasattr(d, m):
+    return getattr(d, m)
+   
+# 自定义标签
+@register.simple_tag
+def get_all_category
+return Category.objects.all()
+```
+
+
+**引用自定义过滤器时需要先导入再使用**
+
+```html
+{% load custom_filter %}
+<html lang="en">
+<body>
+<h1>{{ articles|get_value:"article"|get_attr:"id" }}</h1>
+   {% get_all_category as category_list%}
+   <ul>
+       {% for category in category_list%}
+        <li>
+               <a href="#">{{ category.name }}</a>
+        </li>
+       {% empty %}
+        There is no category!
+       {% endfor%}
+   </ul>
+</body>
+</html>
+```
+
+最终所展现的效果是这样的(这边只放一部分效果，整体效果可以下载项目自行运行查看)![使用过滤器添加分类列表](https://upload-images.jianshu.io/upload_images/2888797-484be5f05be72101.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 

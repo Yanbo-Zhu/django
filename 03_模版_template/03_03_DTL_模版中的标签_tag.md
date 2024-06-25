@@ -119,16 +119,31 @@ context = {
 通过硬编码的方式直接将这个url 写死在里面也是可以的。但是这样对于以后项目维护可能不是一件好事。
 因此建议使用这种反转的方式来实现，类似于django 中的reverse 一样。
 
+```python
+   from django.conf.urls import url
+   from . import views
+
+   # 加上 app_name, 值同 include 中 namespace 的值，否则可能会找不到 url
+   app_name = 'blog'
+   urlpatterns = [
+   	# 当模版引用本地 url 时候需要用到 name 字段值，例如
+   	# <a href="{% url 'blog:home' %}"><b>Home</b></a>
+       url(r'^home$', views.home, name=home),
+   ]
+ ```
+
+
+
 示例代码如下：
 
-```
+```python
 <a href="{% url 'book:list' %}">图书列表页面</a>
 ```
 
 如果url 反转的时候需要传递参数，那么可以在后面传递。但是参数分位置参数和关键字参数。位置参数和关键字参数不能同时使用。
 
 示例代码如下
-```
+```python
 # path部分
 path('detail/<book_id>/',views.book_detail,name='detail')
 
@@ -149,7 +164,7 @@ path('detail/<book_id>/',views.book_detail,name='detail')
 
 移除html标签中的空白字符。包括空格、tab键、换行等。示例代码如下
 
-```
+```html
 {% spaceless %}
     <p>
         <a href="foo/">Foo</a>
@@ -159,13 +174,13 @@ path('detail/<book_id>/',views.book_detail,name='detail')
 
 那么在渲染完成后，会变成以下的代码：
 
-```
+```python
 <p><a href="foo/">Foo</a></p>
 ```
 
 spaceless 只会移除html标签之间的空白字符。而不会移除标签与文本之间的空白字符。看以下代码：
 
-```
+```html
 {% spaceless %}
     <strong>
         Hello
