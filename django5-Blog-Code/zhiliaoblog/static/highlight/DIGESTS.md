@@ -1,4 +1,4 @@
-## Subresource Integrity
+## 0.1 Subresource Integrity
 
 If you are loading Highlight.js via CDN you may wish to use [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) to guarantee that you are using a legimitate build of the library.
 
@@ -16,7 +16,7 @@ To do this you simply need to add the `integrity` attribute for each JavaScript 
 
 The full list of digests for every file can be found below.
 
-### Digests
+### 0.1.1 Digests
 
 ```
 sha384-kCq9CJf66M6NoTFgSHAEGthqZ1X6afHQaIT+Mo236gH3FQ5uAWSIO5OWnM2H1fDA highlight.min.js
